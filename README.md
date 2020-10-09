@@ -1,11 +1,6 @@
 # mongo-cluster-docker
 
-This is a simple 3 node replica mongodb setup based on official `mongo` docker image using `docker-compose` described in my blogpost at https://warzycha.pl/mongo-db-sharding-docker-example/.
-
-For details description, steps and discussion go to:
-
-1. https://warzycha.pl/mongo-db-sharding-docker-example/
-2. https://warzycha.pl/mongo-db-shards-by-location/
+This is a simple 3 node replica mongodb setup based on official `mongo` docker image using `docker-compose`.
 
 # Run
 
@@ -14,18 +9,17 @@ docker-compose -f docker-compose.1.yml -f docker-compose.2.yml  -f docker-compos
 ```
 
 # Tests
-> Manually for the time being
 
 0. Core tests
 
-Basic *replica* test on *rs1* replica set (data nodes), `mongo-1-1`
+Open mongo shell with one of the mongo node like mongo-1-1. Run 
 ```js
 rs.status();
 ```
 
-this should return in `members` 3 nodes.
+It will return `members` 3 nodes.
 
-Basic *sharding* test on *router* (mongos), `mongo-router`
+To check *sharding* status, Connect with *router* (mongos), `mongo-router` and Run:
 ```js
 sh.status();
 ```
@@ -54,37 +48,9 @@ this should return something similar to:
 
 ```
 
-# Sharding configuration
-
-Connect to 'mongos' router and run `queries/shard-status.js` for shard status.
-
-To establish location based partitioning on it just run `queries/init.js`.
-
-# Issues and limitations
-
-It's sometimes stuck on 'mongo-router         | 2017-01-16T21:29:48.573+0000 W NETWORK  [replSetDistLockPinger] No primary detected for
-set cnf-serv'. It's because quite random order in `docker-compose`.
-
-My workaround was just to kill all containers related.
-
-```
-docker-compose -f docker-compose.1.yml -f docker-compose.2.yml  -f docker-compose.cnf.yml -f docker-compose.shard.yml rm -f
-```
-
-Please pull request. :)
-
-Basically `mongosetup` service is now splitted to multiple `yml` files. :)
-
 # Reference
 
-* http://www.sohamkamani.com/blog/2016/06/30/docker-mongo-replica-set/
-* https://github.com/singram/mongo-docker-compose
-* http://stackoverflow.com/questions/31138631/configuring-mongodb-replica-set-from-docker-compose
-* https://gist.github.com/garycrawford/0a45f820e146917d231d
-* http://stackoverflow.com/questions/31746182/docker-compose-wait-for-container-x-before-starting-y
-* https://docs.docker.com/compose/startup-order/
-* http://stackoverflow.com/questions/31138631/configuring-mongodb-replica-set-from-docker-compose
-* https://github.com/soldotno/elastic-mongo/blob/master/docker-compose.yml
+* https://github.com/senssei/mongo-cluster-docker.git 
 
 See more @ `ENV.md`
 
