@@ -50,8 +50,4 @@ this should return something similar to:
 
 # Reference
 
-* https://github.com/senssei/mongo-cluster-docker.git 
-
-See more @ `ENV.md`
-
-MIT @ `LICENSE`
+* https://github.com/senssei/mongo-cluster-docker.git
