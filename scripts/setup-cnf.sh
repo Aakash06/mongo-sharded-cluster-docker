@@ -2,7 +2,6 @@
 
 mongodb1=`getent hosts ${MONGO1} | awk '{ print $1 }'`
 mongodb2=`getent hosts ${MONGO2} | awk '{ print $1 }'`
-mongodb3=`getent hosts ${MONGO3} | awk '{ print $1 }'`
 
 port=${PORT:-27017}
 
@@ -28,10 +27,6 @@ mongo --host ${mongodb1}:${port} <<EOF
             {
                 "_id": 101,
                 "host": "${mongodb2}:${port}"
-            },
-            {
-                "_id": 102,
-                "host": "${mongodb3}:${port}"
             }
         ]
     };
