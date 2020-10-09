@@ -5,13 +5,13 @@ mongodb2=`getent hosts ${MONGO2} | awk '{ print $1 }'`
 
 port=${PORT:-27017}
 
-echo "Waiting for startup.."
+echo "|||||||||||| Waiting for RS to startup.. ||||||||||||"
 until mongo --host ${mongodb1}:${port} --eval 'quit(db.runCommand({ ping: 1 }).ok ? 0 : 2)' &>/dev/null; do
   printf '.'
   sleep 1
 done
 
-echo "Started.."
+echo "|||||||||||| RS Started.. ||||||||||||"
 
 echo setup.sh time now: `date +"%T" `
 mongo --host ${mongodb1}:${port} <<EOF
